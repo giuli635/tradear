@@ -61,6 +61,7 @@ Create table bono (
 Create table estados_contables (
     fecha date not null;
     CUIT int(11) not null;
+    fecha_publicacion date not null;
     ganancia float(20,2) not null;
     total_activos float(20,2) not null;
     total_pasivos float(20,2) not null;
