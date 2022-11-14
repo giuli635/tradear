@@ -15,7 +15,7 @@ TRD_BONO.ID es una clave ajena a ESTADO
 
 EMPRESA(**CUIT**, nombre)
 
-ESTADOS CONTABLES(CUIT, **fecha**, ganancia, total activos, total pasivos, numero de acciones, pasivos corrientes, activos corrientes)
+ESTADOS CONTABLES(CUIT, **fecha**, fecha_publicacion, ganancia, total activos, total pasivos, numero de acciones, pasivos corrientes, activos corrientes)
 ESTADOS CONTABLES.CUIT es una clave ajena a EMPRESA
 
 ESTADO(**ID**, nombre)
