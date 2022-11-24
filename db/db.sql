@@ -1,72 +1,73 @@
 
-Create table cierres (
-    fecha date primary key;
-    acciones float(20,2) not null;
-    préstamos_tit._valores float(20,2) not null;
-    pase_tomador float(20,2) not null;
-    pase_colocador float(20,2) not null;
-    cedears float(20,2) not null;
-    opciones float(20,2) not null;
-    futuros float(20,2) not null;
-    cauciones float(20,2) not null;
-    titulos_publicos float(20,2) not null;
-    ejercicios float(20,2) not null;
-    obligaciones_negociables float(20,2) not null;
-)
+CREATE TABLE cierres (
+    fecha DATE PRIMARY KEY,
+    acciones FLOAT(20,2) NOT NULL,
+    préstamos_tit_valores FLOAT(20,2) NOT NULL,
+    pase_tomador FLOAT(20,2) NOT NULL,
+    pase_colocador FLOAT(20,2) NOT NULL,
+    cedears FLOAT(20,2) NOT NULL,
+    opciones FLOAT(20,2) NOT NULL,
+    futuros FLOAT(20,2) NOT NULL,
+    cauciones FLOAT(20,2) NOT NULL,
+    titulos_publicos FLOAT(20,2) NOT NULL,
+    ejercicios FLOAT(20,2) NOT NULL,
+    obligaciones_negociables FLOAT(20,2) NOT NULL
+);
 
-Create table TRD (
-    especie varchar(10) primary key;
-)
+CREATE TABLE TRD (
+    especie VARCHAR(10) PRIMARY KEY
+);
 
-Create table TRD_en_cierres (
-    fecha date not null;
-    especie varchar(10) not null;
-    monto float(20,2) not null;
-    volumen int(20) not null;
-    vencimiento date not null;
-    precio float(20,2) not null;
-    Primary key (fecha,especie)
-    Foreign key FK_fecha references cierres(fecha);
-    Foreign key FK_especie references TRD(especie);
-)
+CREATE TABLE TRD_en_cierres (
+    fecha DATE NOT NULL,
+    especie VARCHAR(10) NOT NULL,
+    monto FLOAT(20,2) NOT NULL,
+    volumen INT(20) NOT NULL,
+    vencimiento DATE NOT NULL,
+    precio FLOAT(20,2) NOT NULL,
+    FOREIGN KEY FK_fecha(fecha) REFERENCES cierres(fecha),
+    FOREIGN KEY FK_especieCierreTRD(especie) REFERENCES TRD(especie),
+    PRIMARY KEY (fecha, especie)
+);
 
-Create table empresa (
-    CUIT int(11) primary key;
-    nombre varchar(20) not null;
-)
+CREATE TABLE empresa (
+    CUIT INT(11) PRIMARY KEY,
+    nombre VARCHAR(20) NOT NULL
+);
 
-Create table accion (
-    especie varchar(10) primary key;
-    CUIT int (11) not null;
-    valor_nominal float(20,2) not null;
-    Foreign key FK_CUIT references empresa(CUIT);
-    Foreign key FK_especie references TRD(especie);
-)
+CREATE TABLE accion (
+    especie VARCHAR(10) PRIMARY KEY,
+    CUIT INT(11) NOT NULL,
+    valor_nominal FLOAT(20,2) NOT NULL,
+    FOREIGN KEY FK_CUITaccion(CUIT) REFERENCES empresa(CUIT),
+    FOREIGN KEY FK_especieAccion(especie) REFERENCES TRD(especie)
+);
 
-Create table estado (
-    ID int(3) primary key auto_increment;
-    nombre varchar(20) not null;
-)
+CREATE TABLE estado (
+    ID INT(3) PRIMARY KEY auto_increment,
+    nombre VARCHAR(20) NOT NULL
+);
 
-Create table bono (
-    especie varchar(10) primary key;
-    ID int (3) not null;
-    moneda_de_emision varchar(30) not null;
-    fecha de vencimiento date not null;
-    fecha de emision date not null;
-    amortizacion text(1000) not null;
-    intereses text(1000) not null;
-)
+CREATE TABLE bono (
+    especie VARCHAR(10) PRIMARY KEY,
+    ID INT (3) NOT NULL,
+    moneda_de_emision VARCHAR(30) NOT NULL,
+    fecha_de_vencimiento DATE NOT NULL,
+    fecha_de_emision DATE NOT NULL,
+    amortizacion TEXT(1000) NOT NULL,
+    intereses TEXT(1000) NOT NULL,
+    FOREIGN KEY FK_especieBono(especie) REFERENCES TRD(especie)
+);
 
-Create table estados_contables (
-    fecha date not null;
-    CUIT int(11) not null;
-    ganancia float(20,2) not null;
-    total_activos float(20,2) not null;
-    total_pasivos float(20,2) not null;
-    numero_de_acciones int(20) not null;
-    pasivos_corrientes float(20,2) not null;
-    activos_corrientes float(20,2) not null;
-    Primary key (CUIT, fecha);
-    Foreign key FK_CUIT references empresa(CUIT);
-)
+CREATE TABLE estados_contables (
+    fecha DATE NOT NULL,
+    CUIT INT(11) NOT NULL,
+    ganancia FLOAT(20,2) NOT NULL,
+    total_activos FLOAT(20,2) NOT NULL,
+    total_pasivos FLOAT(20,2) NOT NULL,
+    numero_de_acciones INT(20) NOT NULL,
+    pasivos_corrientes FLOAT(20,2) NOT NULL,
+    activos_corrientes FLOAT(20,2) NOT NULL,
+    PRIMARY KEY (CUIT, fecha),
+    FOREIGN KEY FK_CUITestadosContables(CUIT) REFERENCES empresa(CUIT)
+);
