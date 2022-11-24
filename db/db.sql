@@ -55,7 +55,7 @@ CREATE TABLE bono (
     fecha_de_vencimiento DATE NOT NULL,
     fecha_de_emision DATE NOT NULL,
     amortizacion TEXT(1000) NOT NULL,
-    intereses TEXT(1000) NOT NULL,
+    INTereses TEXT(1000) NOT NULL,
     FOREIGN KEY FK_especieBono(especie) REFERENCES TRD(especie)
 );
 
@@ -71,3 +71,17 @@ CREATE TABLE estados_contables (
     PRIMARY KEY (CUIT, fecha),
     FOREIGN KEY FK_CUITestadosContables(CUIT) REFERENCES empresa(CUIT)
 );
+
+CREATE  TABLE estados_contables (
+    fecha DATE NOT NULL,
+    CUIT INT(11) NOT NULL,
+    fecha_publicacion DATE NOT NULL,
+    ganancia FLOAT(20,2) NOT NULL,
+    total_activos FLOAT(20,2) NOT NULL,
+    total_pasivos FLOAT(20,2) NOT NULL,
+    numero_de_acciones INT(20) NOT NULL,
+    pasivos_corrientes FLOAT(20,2) NOT NULL,
+    activos_corrientes FLOAT(20,2) NOT NULL,
+    PRIMARY KEY (CUIT, fecha),
+    FOREIGN KEY FK_CUITestadosContables(CUIT) REFERENCES empresa(CUIT)
+)
