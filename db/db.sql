@@ -21,13 +21,13 @@ CREATE TABLE TRD (
 CREATE TABLE TRD_en_cierres (
     fecha DATE NOT NULL,
     especie VARCHAR(10) NOT NULL,
+    vencimiento INT(2) NOT NULL,
     monto FLOAT(20,2) NOT NULL,
     volumen INT(20) NOT NULL,
-    vencimiento DATE NOT NULL,
     precio FLOAT(20,2) NOT NULL,
     FOREIGN KEY FK_fecha(fecha) REFERENCES cierres(fecha),
     FOREIGN KEY FK_especieCierreTRD(especie) REFERENCES TRD(especie),
-    PRIMARY KEY (fecha, especie)
+    PRIMARY KEY (fecha, especie, vencimiento)
 );
 
 CREATE TABLE empresa (
@@ -59,19 +59,6 @@ CREATE TABLE bono (
     FOREIGN KEY FK_especieBono(especie) REFERENCES TRD(especie)
 );
 
-CREATE TABLE estados_contables (
-    fecha DATE NOT NULL,
-    CUIT INT(11) NOT NULL,
-    ganancia FLOAT(20,2) NOT NULL,
-    total_activos FLOAT(20,2) NOT NULL,
-    total_pasivos FLOAT(20,2) NOT NULL,
-    numero_de_acciones INT(20) NOT NULL,
-    pasivos_corrientes FLOAT(20,2) NOT NULL,
-    activos_corrientes FLOAT(20,2) NOT NULL,
-    PRIMARY KEY (CUIT, fecha),
-    FOREIGN KEY FK_CUITestadosContables(CUIT) REFERENCES empresa(CUIT)
-);
-
 CREATE  TABLE estados_contables (
     fecha DATE NOT NULL,
     CUIT INT(11) NOT NULL,
@@ -84,4 +71,4 @@ CREATE  TABLE estados_contables (
     activos_corrientes FLOAT(20,2) NOT NULL,
     PRIMARY KEY (CUIT, fecha),
     FOREIGN KEY FK_CUITestadosContables(CUIT) REFERENCES empresa(CUIT)
-)
+);
